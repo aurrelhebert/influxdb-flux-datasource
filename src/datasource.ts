@@ -145,8 +145,7 @@ export default class InfluxDatasource {
         if (res && res.data && res.data.trim()) {
           return {
             status: 'success',
-            message:
-              'Data source connected and main token saved can be re-used with "${this.database}"',
+            message: 'Data source connected and main token saved.',
           };
         }
         return {
