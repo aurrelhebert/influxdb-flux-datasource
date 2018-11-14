@@ -133,18 +133,20 @@ export default class InfluxDatasource {
     if (!query) {
       return Promise.resolve({data: ''});
     }
-    return this._influxRequest('POST', '/v2/query', {query: query, options: options});
+
+    return this._influxRequest('POST', '/v2/query', {query: query, range: options.range});
   }
 
   testDatasource() {
-    const query = `from(bucket:"${this.database}") |> last()`;
+    const query = `fromMetrics(token:\"${this.database}\")`;
 
     return this._influxRequest('POST', '/v2/query', {query: query})
       .then(res => {
         if (res && res.data && res.data.trim()) {
           return {
             status: 'success',
-            message: 'Data source connected and database found.',
+            message:
+              'Data source connected and main token saved can be re-used with "${this.database}"',
           };
         }
         return {
