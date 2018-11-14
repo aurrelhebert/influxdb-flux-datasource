@@ -5,8 +5,7 @@ import './editor/editor_component';
 
 function makeDefaultQuery(database) {
   return `fromMetrics(token: "${database}")
-  |> range($range)
-  |> limit(n:1000)
+  |> filter(fn: (r) => r._measurement == "__to_set" )
 `;
 }
 export class InfluxFluxQueryCtrl extends QueryCtrl {

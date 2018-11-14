@@ -14487,8 +14487,7 @@ define(
                     if (res && res.data && res.data.trim()) {
                       return {
                         status: 'success',
-                        message:
-                          'Data source connected and main token saved can be re-used with "${this.database}"',
+                        message: 'Data source connected and main token saved.',
                       };
                     }
                     return {
@@ -16698,7 +16697,7 @@ define(
               return (
                 'fromMetrics(token: "' +
                 database +
-                '")\n  |> range($range)\n  |> limit(n:1000)\n'
+                '")\n  |> filter(fn: (r) => r._measurement == "__to_set" )\n'
               );
             }
             var InfluxFluxQueryCtrl = /** @class */ (function(_super) {
